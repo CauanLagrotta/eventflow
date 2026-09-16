@@ -2,6 +2,8 @@ package com.cauanlagrotta.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttribute;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
@@ -33,6 +35,7 @@ public class Event {
         this.id = id;
     }
 
+    @NotNull(message = "Name is mandatory")
     @DynamoDbAttribute("name")
     public String getName() {
         return name;
@@ -52,6 +55,7 @@ public class Event {
         this.image = image;
     }
 
+    @NotNull(message = "Description is mandatory")
     @DynamoDbAttribute("description")
     public String getDescription() {
         return description;
@@ -61,6 +65,7 @@ public class Event {
         this.description = description;
     }
 
+    @NotNull(message = "Date is mandatory")
     @DynamoDbAttribute("date")
     public LocalDateTime getDate() {
         return date;
@@ -70,6 +75,7 @@ public class Event {
         this.date = date;
     }
 
+    @NotNull(message = "Location is mandatory")
     @DynamoDbAttribute("location")
     public String getLocation() {
         return location;
@@ -79,6 +85,8 @@ public class Event {
         this.location = location;
     }
 
+    @NotNull(message = "Amount tickets is mandatory")
+    @Min(value = 0, message = "Amount tickets cannot be less than 0")
     @DynamoDbAttribute("amount_tickets")
     public Long getAmountTickets() {
         return amountTickets;
