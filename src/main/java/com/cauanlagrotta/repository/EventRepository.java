@@ -1,4 +1,4 @@
-package com.cauanlagrotta.wrapper;
+package com.cauanlagrotta.repository;
 
 import java.util.List;
 
@@ -12,15 +12,16 @@ import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 
 @Component 
-public class EventWrapper {
+public class EventRepository {
     private final DynamoDbTable<Event> table;
 
-    public EventWrapper(DynamoDbEnhancedClient client) {
+    public EventRepository(DynamoDbEnhancedClient client) {
         this.table = client.table("Events", TableSchema.fromBean(Event.class));
     }
 
     public void save(Event event) { table.putItem(event); }
-    public Event findById(Long id) { return table.getItem(Key.builder().partitionValue(id).build()); }
+    public Event findById(Long eventId) { return table.getItem(Key.builder().partitionValue(eventId).build()); }
     public List<Event> findAll() { return table.scan().items().stream().toList(); }
-    public void delete(Long id) { table.deleteItem(Key.builder().partitionValue(id).build()); }
+    public void update(Event event) { table.updateItem(event); }
+    public void delete(Long eventId) { table.deleteItem(Key.builder().partitionValue(eventId).build()); }
 }
