@@ -1,6 +1,8 @@
 package com.cauanlagrotta.service.impl;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -16,37 +18,48 @@ import lombok.RequiredArgsConstructor;
 @Validated
 @RequiredArgsConstructor 
 public class EventServiceImpl implements EventService {
+
     private final EventRepository repository;
 
+    private final String UUID_PREFIX = "EVT-";
+
     @Override
-    public Event create(@Valid Event event) {
+    public Event create(Event event) {
+
+        if(Objects.isNull(event.getId())){
+            event.setId(UUID_PREFIX + UUID.randomUUID());
+        }
+
         this.repository.save(event);
         return event;
     }
 
     @Override
     public List<Event> findAll() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.repository.findAll();
     }
-    
+
     @Override
-    public void delete(Long eventId) {
-        
-        
+    public void delete(String eventId) {
+        findById(eventId);
+        this.repository.delete(eventId);
     }
 
 
     @Override
-    public Event findById(Long eventId) {
-        // TODO Auto-generated method stub
-        return null;
+    public Event findById(String eventId) {
+        Event event = this.repository.findById(eventId);
+
+        if(event == null || event.getId() != eventId) throw new RuntimeException("Event not found");
+
+        return event;
     }
 
     @Override
     public Event update(Event event) {
-        // TODO Auto-generated method stub
-        return null;
+        findById(event.getId());
+        this.repository.update(event);
+        return event;
     }
 
     
