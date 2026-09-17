@@ -20,8 +20,8 @@ public class EventRepository {
     }
 
     public void save(Event event) { table.putItem(event); }
-    public Event findById(Long eventId) { return table.getItem(Key.builder().partitionValue(eventId).build()); }
+    public Event findById(String eventId) { return table.getItem(Key.builder().partitionValue(eventId).build()); }
     public List<Event> findAll() { return table.scan().items().stream().toList(); }
     public void update(Event event) { table.updateItem(event); }
-    public void delete(Long eventId) { table.deleteItem(Key.builder().partitionValue(eventId).build()); }
+    public void delete(String eventId) { table.deleteItem(Key.builder().partitionValue(eventId).build()); }
 }

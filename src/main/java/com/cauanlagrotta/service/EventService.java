@@ -6,8 +6,8 @@ import com.cauanlagrotta.entity.Event;
 
 public interface EventService {
     Event create(Event event);
-    Event findById(Long eventId);
+    Event findById(String eventId);
     List<Event> findAll();
     Event update(Event event);
-    void delete(Long eventId);
+    void delete(String eventId);
  }

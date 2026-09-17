@@ -11,7 +11,7 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbParti
 @DynamoDbBean
 public class Event {
 
-    private Long id;
+    private String id;
 
     private String name;
 
@@ -27,11 +27,11 @@ public class Event {
 
     @DynamoDbPartitionKey 
     @DynamoDbAttribute("id")
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
