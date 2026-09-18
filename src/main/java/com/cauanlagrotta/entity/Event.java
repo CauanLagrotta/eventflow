@@ -25,6 +25,10 @@ public class Event {
 
     private Long amountTickets;
 
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+
     @DynamoDbPartitionKey 
     @DynamoDbAttribute("id")
     public String getId() {
@@ -33,6 +37,24 @@ public class Event {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @DynamoDbAttribute("created_at")
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    @DynamoDbAttribute("updated_at")
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @NotNull(message = "Name is mandatory")
@@ -95,6 +117,8 @@ public class Event {
     public void setAmountTickets(Long amountTickets) {
         this.amountTickets = amountTickets;
     }
+
+
 
     
 }

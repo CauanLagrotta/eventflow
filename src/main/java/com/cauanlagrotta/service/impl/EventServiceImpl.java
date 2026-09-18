@@ -1,5 +1,6 @@
 package com.cauanlagrotta.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -29,6 +30,9 @@ public class EventServiceImpl implements EventService {
         if(Objects.isNull(event.getId())){
             event.setId(UUID_PREFIX + UUID.randomUUID());
         }
+
+        event.setCreatedAt(LocalDateTime.now());
+        event.setUpdatedAt(LocalDateTime.now());
 
         this.repository.save(event);
         return event;
