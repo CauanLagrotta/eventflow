@@ -13,16 +13,22 @@ public class Event {
 
     private String id;
 
+    @NotNull(message = "Name is mandatory")
     private String name;
 
     private String image;
 
+    @NotNull(message = "Description is mandatory")
     private String description;
 
+    @NotNull(message = "Date is mandatory")
     private LocalDateTime date;
 
+    @NotNull(message = "Location is mandatory")
     private String location;
 
+    @NotNull(message = "Amount tickets is mandatory")
+    @Min(value = 0, message = "Amount tickets cannot be less than 0")
     private Long amountTickets;
 
     private LocalDateTime createdAt;
@@ -57,7 +63,6 @@ public class Event {
         this.updatedAt = updatedAt;
     }
 
-    @NotNull(message = "Name is mandatory")
     @DynamoDbAttribute("name")
     public String getName() {
         return name;
@@ -77,7 +82,6 @@ public class Event {
         this.image = image;
     }
 
-    @NotNull(message = "Description is mandatory")
     @DynamoDbAttribute("description")
     public String getDescription() {
         return description;
@@ -87,7 +91,6 @@ public class Event {
         this.description = description;
     }
 
-    @NotNull(message = "Date is mandatory")
     @DynamoDbAttribute("date")
     public LocalDateTime getDate() {
         return date;
@@ -97,7 +100,6 @@ public class Event {
         this.date = date;
     }
 
-    @NotNull(message = "Location is mandatory")
     @DynamoDbAttribute("location")
     public String getLocation() {
         return location;
@@ -107,8 +109,6 @@ public class Event {
         this.location = location;
     }
 
-    @NotNull(message = "Amount tickets is mandatory")
-    @Min(value = 0, message = "Amount tickets cannot be less than 0")
     @DynamoDbAttribute("amount_tickets")
     public Long getAmountTickets() {
         return amountTickets;
