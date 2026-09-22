@@ -1,7 +1,6 @@
 package com.cauanlagrotta.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.cauanlagrotta.entity.Event;
 import com.cauanlagrotta.service.EventService;
@@ -10,8 +9,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
 
 
 @RestController 
@@ -27,5 +26,10 @@ public class EventController {
         Event createdEvent = this.eventService.create(event);
         return ResponseEntity.ok(createdEvent);
     }
-    
+
+    @GetMapping
+    public ResponseEntity<List<Event>> getAllEvents() {
+        List<Event> list = this.eventService.findAll();
+        return  ResponseEntity.ok(list);
+    }
 }

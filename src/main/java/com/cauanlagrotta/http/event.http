@@ -9,3 +9,7 @@ Content-Type: application/json
   "amountTickets": 500,
   "image": "https://exemplo.com/show.jpg"
 }
+
+###
+
+GET http://localhost:8080/api/event
