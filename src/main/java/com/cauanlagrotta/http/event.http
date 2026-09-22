@@ -1,0 +1,11 @@
+POST http://localhost:8080/api/event/create
+Content-Type: application/json
+
+{
+  "name": "Show de Rock",
+  "description": "Show ao vivo com bandas locais",
+  "date": "2024-12-20T19:30:00",
+  "location": "Espaço das Américas, São Paulo",
+  "amountTickets": 500,
+  "image": "https://exemplo.com/show.jpg"
+}
