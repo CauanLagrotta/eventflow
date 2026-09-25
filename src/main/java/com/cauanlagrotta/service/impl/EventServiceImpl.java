@@ -65,7 +65,7 @@ public class EventServiceImpl implements EventService {
     public Event findById(String eventId) {
         Event event = this.repository.findById(eventId);
 
-        if(event == null || event.getId() != eventId) throw new RuntimeException("Event not found");
+        if(event == null || !Objects.equals(event.getId(), eventId)) throw new RuntimeException("Event not found");
 
         return event;
     }
