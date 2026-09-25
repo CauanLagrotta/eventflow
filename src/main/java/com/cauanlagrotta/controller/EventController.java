@@ -46,4 +46,10 @@ public class EventController {
             new PaginationResponse(nextPageToken, limit, nextPageToken != null)
         ));
     }
+
+    @GetMapping("/{eventId}")
+    public ResponseEntity<Event> getEventById(@PathVariable String eventId) {
+        Event event = this.eventService.findById(eventId);
+        return ResponseEntity.ok(event);
+    }
 }
