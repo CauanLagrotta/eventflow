@@ -52,4 +52,10 @@ public class EventController {
         Event event = this.eventService.findById(eventId);
         return ResponseEntity.ok(event);
     }
+
+    @DeleteMapping("/{eventId}")
+    public ResponseEntity<Void> deleteEventById(@PathVariable String eventId) {
+        this.eventService.delete(eventId);
+        return ResponseEntity.noContent().build();
+    }
 }
