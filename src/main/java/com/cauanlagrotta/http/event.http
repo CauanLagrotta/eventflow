@@ -17,3 +17,7 @@ GET http://localhost:8080/api/event?limit=2&pageToken=eyJpZCI6e319
 ###
 
 GET http://localhost:8080/api/event/EVT-08c711d1-e1f6-495c-8a22-d20b67bf285a
+
+###
+
+DELETE http://localhost:8080/api/event/EVT-d00e7694-7c36-485f-a409-4ec067559b6d
