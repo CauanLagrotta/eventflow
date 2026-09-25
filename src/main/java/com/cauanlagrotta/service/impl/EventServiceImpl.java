@@ -2,9 +2,12 @@ package com.cauanlagrotta.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.cauanlagrotta.dto.PaginatedResult;
+import com.cauanlagrotta.helper.DynamoTokenHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -14,6 +17,7 @@ import com.cauanlagrotta.service.EventService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
 @Service
 @Validated
@@ -21,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class EventServiceImpl implements EventService {
 
     private final EventRepository repository;
+    private final DynamoTokenHelper  tokenHelper;
 
     private final String UUID_PREFIX = "EVT-";
 
@@ -39,8 +44,14 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> findAll() {
-        return this.repository.findAll();
+    public PaginatedResult findAll(Integer limit, String pageToken) {
+        Map<String, AttributeValue> exclusiveStart = null;
+
+        if(pageToken != null){
+            exclusiveStart = this.tokenHelper.decodeToken(pageToken);
+        }
+
+        return repository.findAll(limit, exclusiveStart);
     }
 
     @Override
