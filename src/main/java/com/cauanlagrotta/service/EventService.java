@@ -10,6 +10,6 @@ public interface EventService {
     Event create(Event event);
     Event findById(String eventId);
     PaginatedResult findAll(Integer limit, String pageToken);
-    Event update(Event event);
+    Event update(String eventId, Event event);
     void delete(String eventId);
  }

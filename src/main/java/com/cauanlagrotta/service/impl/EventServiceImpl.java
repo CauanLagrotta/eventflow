@@ -71,8 +71,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event update(Event event) {
-        findById(event.getId());
+    public Event update(String eventId, Event event) {
+        Event existing = findById(eventId);
+        event.setId(eventId);
+        event.setCreatedAt(existing.getCreatedAt());
+        event.setUpdatedAt(LocalDateTime.now());
         this.repository.update(event);
         return event;
     }

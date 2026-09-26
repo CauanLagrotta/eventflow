@@ -21,3 +21,17 @@ GET http://localhost:8080/api/event/EVT-08c711d1-e1f6-495c-8a22-d20b67bf285a
 ###
 
 DELETE http://localhost:8080/api/event/EVT-d00e7694-7c36-485f-a409-4ec067559b6d
+
+###
+
+PUT http://localhost:8080/api/event/EVT-a2234052-b344-4935-bdd2-0872a3daf33f
+Content-Type: application/json
+
+{
+  "name": "Show de Rock - Atualizado",
+  "description": "Show ao vivo com bandas locais - atualizado",
+  "date": "2024-12-20T19:30:00",
+  "location": "Espaço das Américas, São Paulo",
+  "amountTickets": 750,
+  "image": "https://exemplo.com/show.jpg"
+}

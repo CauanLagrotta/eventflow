@@ -12,6 +12,7 @@ import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
+import software.amazon.awssdk.enhanced.dynamodb.model.IgnoreNullsMode;
 import software.amazon.awssdk.enhanced.dynamodb.model.Page;
 import software.amazon.awssdk.enhanced.dynamodb.model.ScanEnhancedRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
@@ -26,8 +27,7 @@ public class EventRepository {
 
     public void save(Event event) { table.putItem(event); }
     public Event findById(String eventId) { return table.getItem(Key.builder().partitionValue(eventId).build()); }
-    public List<Event> findAll() { return table.scan().items().stream().toList(); }
-    public void update(Event event) { table.updateItem(event); }
+    public void update(Event event) { table.updateItem(builder -> builder.item(event).ignoreNullsMode(IgnoreNullsMode.SCALAR_ONLY) ); }
     public void delete(String eventId) { table.deleteItem(Key.builder().partitionValue(eventId).build()); }
 
     public PaginatedResult findAll(Integer limit, Map<String, AttributeValue> exclusiveStartKey){

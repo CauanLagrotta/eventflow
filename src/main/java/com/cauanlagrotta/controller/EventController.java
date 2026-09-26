@@ -53,6 +53,13 @@ public class EventController {
         return ResponseEntity.ok(event);
     }
 
+    @PutMapping("/{eventId}")
+    public ResponseEntity<Event> updateEvent(@PathVariable String eventId,
+                                             @Valid @RequestBody Event event) {
+        Event updatedEvent = this.eventService.update(eventId, event);
+        return ResponseEntity.ok(updatedEvent);
+    }
+
     @DeleteMapping("/{eventId}")
     public ResponseEntity<Void> deleteEventById(@PathVariable String eventId) {
         this.eventService.delete(eventId);
