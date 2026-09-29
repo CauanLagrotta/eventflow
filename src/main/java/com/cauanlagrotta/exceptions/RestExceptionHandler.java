@@ -51,4 +51,15 @@ public class RestExceptionHandler {
         return ResponseEntity.badRequest().body(error);
     }
 
+    @ExceptionHandler(EventNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleEventNotFoundException(EventNotFoundException e){
+        var error = new ErrorResponse(
+            "Not found",
+            404,
+            "EVENT_NOT_FOUND",
+            e.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
 }
