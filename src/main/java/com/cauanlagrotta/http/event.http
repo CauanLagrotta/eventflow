@@ -12,10 +12,17 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/api/event?limit=2&pageToken=eyJpZCI6e319
+# pageToken: copie o "pagination.pageToken" retornado pelo GET abaixo.
+# Limite menor que o total força a próxima página.
+GET http://localhost:8080/api/event?limit=1
 
 ###
 
+GET http://localhost:8080/api/event?limit=1&pageToken=eyJpZCI6eyJTIjoiRVZULWU1ODJhZWIzLTg5YzQtNDZmOC1iZDA3LWI2NWFhMjNlNTIyNCJ9fQ==
+
+###
+
+# Troque pelo id retornado no POST /create
 GET http://localhost:8080/api/event/EVT-08c711d1-e1f6-495c-8a22-d20b67bf285a
 
 ###
