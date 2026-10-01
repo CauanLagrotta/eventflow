@@ -62,4 +62,15 @@ public class RestExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
+    @ExceptionHandler(InvalidPageTokenException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidPageTokenException(InvalidPageTokenException e){
+        var error = new ErrorResponse(
+            "Bad Request",
+            400,
+            "INVALID_PAGE_TOKEN",
+            e.getMessage()
+        );
+        return ResponseEntity.badRequest().body(error);
+    }
+
 }
