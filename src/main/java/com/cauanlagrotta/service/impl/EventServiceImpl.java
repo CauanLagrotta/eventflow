@@ -57,8 +57,10 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventResponse update(String eventId, EventUpdateRequest request) {
-        findById(eventId);
+        EventResponse existing = findById(eventId);
         Event entity = request.toEntity();
+        entity.setId(eventId);
+        entity.setCreatedAt(existing.createdAt());
         entity.setUpdatedAt(LocalDateTime.now());
         this.repository.update(entity);
         return entity.toResponse();
