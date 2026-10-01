@@ -12,7 +12,6 @@ import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
-import software.amazon.awssdk.enhanced.dynamodb.model.IgnoreNullsMode;
 import software.amazon.awssdk.enhanced.dynamodb.model.Page;
 import software.amazon.awssdk.enhanced.dynamodb.model.ScanEnhancedRequest;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;

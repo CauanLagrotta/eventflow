@@ -2,13 +2,20 @@ package com.cauanlagrotta.entity;
 
 import java.time.LocalDateTime;
 
+import com.cauanlagrotta.dto.response.EventResponse;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttribute;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
 @DynamoDbBean
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Event {
 
     private String id;
@@ -119,6 +126,18 @@ public class Event {
     }
 
 
-
+    public EventResponse toResponse(){
+        return new EventResponse(
+            id,
+            name,
+            image,
+            description,
+            date,
+            location,
+            amountTickets,
+            createdAt,
+            updatedAt
+        );
+    }
     
 }

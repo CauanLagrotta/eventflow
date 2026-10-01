@@ -3,10 +3,13 @@ package com.cauanlagrotta.controller;
 import com.cauanlagrotta.dto.ListResponse;
 import com.cauanlagrotta.dto.PaginatedResult;
 import com.cauanlagrotta.dto.PaginationResponse;
+import com.cauanlagrotta.dto.request.EventCreateRequest;
+import com.cauanlagrotta.dto.response.EventResponse;
+import com.cauanlagrotta.dto.request.EventUpdateRequest;
+import com.cauanlagrotta.entity.Event;
 import com.cauanlagrotta.helper.DynamoTokenHelper;
 import org.springframework.web.bind.annotation.*;
 
-import com.cauanlagrotta.entity.Event;
 import com.cauanlagrotta.service.EventService;
 
 import jakarta.validation.Valid;
@@ -14,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
 import java.util.Map;
 
 
@@ -27,36 +29,36 @@ public class EventController {
     private final DynamoTokenHelper tokenHelper;
 
     @PostMapping("/create")
-    public ResponseEntity<Event> createEvent(@Valid @RequestBody Event event) {
+    public ResponseEntity<EventResponse> createEvent(@Valid @RequestBody EventCreateRequest event) {
         
-        Event createdEvent = this.eventService.create(event);
+        EventResponse createdEvent = this.eventService.create(event);
         return ResponseEntity.ok(createdEvent);
     }
 
     @GetMapping
-    public ResponseEntity<ListResponse<Event>> getAllEvents(@RequestParam(defaultValue = "10") Integer limit,
-                                                            @RequestParam(required = false) String pageToken) {
+    public ResponseEntity<ListResponse<EventResponse>> getAllEvents(@RequestParam(defaultValue = "10") Integer limit,
+                                                                    @RequestParam(required = false) String pageToken) {
 
         PaginatedResult result = this.eventService.findAll(limit, pageToken);
         String nextPageToken = this.tokenHelper.encodeToken(result.lastKey());
 
         return ResponseEntity.ok(new ListResponse<>(
             Map.of(),
-            result.items(),
+            result.items().stream().map(Event::toResponse).toList(),
             new PaginationResponse(nextPageToken, limit, nextPageToken != null)
         ));
     }
 
     @GetMapping("/{eventId}")
-    public ResponseEntity<Event> getEventById(@PathVariable String eventId) {
-        Event event = this.eventService.findById(eventId);
+    public ResponseEntity<EventResponse> getEventById(@PathVariable String eventId) {
+        EventResponse event = this.eventService.findById(eventId);
         return ResponseEntity.ok(event);
     }
 
     @PutMapping("/{eventId}")
-    public ResponseEntity<Event> updateEvent(@PathVariable String eventId,
-                                             @Valid @RequestBody Event event) {
-        Event updatedEvent = this.eventService.update(eventId, event);
+    public ResponseEntity<EventResponse> updateEvent(@PathVariable String eventId,
+                                             @Valid @RequestBody EventUpdateRequest event) {
+        EventResponse updatedEvent = this.eventService.update(eventId, event);
         return ResponseEntity.ok(updatedEvent);
     }
 

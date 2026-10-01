@@ -1,15 +1,14 @@
 package com.cauanlagrotta.service;
 
-import java.util.List;
-
 import com.cauanlagrotta.dto.PaginatedResult;
-import com.cauanlagrotta.entity.Event;
-import com.cauanlagrotta.repository.EventRepository;
+import com.cauanlagrotta.dto.request.EventCreateRequest;
+import com.cauanlagrotta.dto.response.EventResponse;
+import com.cauanlagrotta.dto.request.EventUpdateRequest;
 
 public interface EventService {
-    Event create(Event event);
-    Event findById(String eventId);
+    EventResponse create(EventCreateRequest request);
+    EventResponse findById(String eventId);
     PaginatedResult findAll(Integer limit, String pageToken);
-    Event update(String eventId, Event event);
+    EventResponse update(String eventId, EventUpdateRequest request);
     void delete(String eventId);
  }

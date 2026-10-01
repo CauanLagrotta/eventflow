@@ -1,5 +1,6 @@
 package com.cauanlagrotta.dto;
 
+import com.cauanlagrotta.dto.response.EventResponse;
 import com.cauanlagrotta.entity.Event;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
